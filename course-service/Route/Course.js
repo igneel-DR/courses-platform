@@ -14,7 +14,7 @@ router.get("/all", verifyToken, async (req, res)=>{
     }
 })
 
-router.post("/add", async (req, res)=>{
+router.post("/add", verifyToken, async (req, res)=>{
     try{
         const newCourse = new CourseModel(req.body)
         const course = await newCourse.save();
@@ -25,7 +25,7 @@ router.post("/add", async (req, res)=>{
     }
 })
 
-router.put("/update/:id", async(req, res)=>{
+router.put("/update/:id", verifyToken, async(req, res)=>{
     try {
         const course = await CourseModel.findOneAndUpdate({ id: req.params.id }, req.body, { new: true });
         if (!course) {
@@ -38,7 +38,7 @@ router.put("/update/:id", async(req, res)=>{
     }
 })
 
-router.delete("/delete/:id", async(req, res)=>{
+router.delete("/delete/:id", verifyToken, async(req, res)=>{
     try {
         const course = await CourseModel.deleteOne({id: req.params.id});
         res.json(course)
@@ -48,7 +48,7 @@ router.delete("/delete/:id", async(req, res)=>{
     }
 })
 
-router.get("/search/:id", async(req, res)=>{
+router.get("/search/:id", verifyToken, async(req, res)=>{
     try{
         const Course = await CourseModel.findOne({id: req.params.id})
         res.json(Course) 

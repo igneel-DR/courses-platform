@@ -32,7 +32,11 @@ router.post("/add", verifyToken, async(req, res)=>{
 
 router.post("/enroll/:etudiant_id/:cours_id", verifyToken, async(req, res)=>{
     try{
-        const fetchCourses = await axios.get(`http://localhost:3001/course/search/${req.params.cours_id}`)
+        const fetchCourses = await axios.get(`http://localhost:3001/course/search/${req.params.cours_id}`,{
+            headers: { 
+                'Authorization': req.headers['authorization'] 
+            }
+        });
         const course = fetchCourses.data;
         if (!course){
             return res.json({message: "Cours not found"}) 
