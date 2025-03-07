@@ -1,0 +1,4 @@
+teacher-service/node_modules/
+student-service/node_modules/
+course-service/node_modules/
+auth-service/node_modules/
